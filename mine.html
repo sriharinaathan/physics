@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<link rel = "stylesheet" href = "phy.css">
+<div id="section1">
+    <div class="background">
+        <button class="button" onclick="display('section2')">Wave Function and Schrodinger Equation</button>
+    <div class = "container">
+        <h1>Project done by</h1>
+        <p>Veyil Mithran</p>
+        <p>Uhith S</p>
+        <p>Srihari naathan</p>
+        <p>Sudharsan R</p>
+        <p>Susmitha PL</p>
+        <p>Shwetha K</p>
+    </div>
+    </div>
+</div>
+<div id="section2">
+    <div class="background-1">
+        <h1 class="h1">Wave Function and Schrodinger Equation</h1>
+        <p class = "p">The wave function is a fundamental concept in quantum mechanics that describes the quantum state of a particle or system of particles. Represented typically by the Greek letter Ψ (psi), the wave function contains all the probabilistic information about a system. The square of its magnitude, |Ψ(x,t)|², gives the probability density of finding a particle at position x at time t. Although the wave function itself doesn’t represent a physical observable, it plays a central role in predicting measurable outcomes, such as position, momentum, and energy.
+        </p>
+        <p class = "p">The Schrödinger equation is the key mathematical equation in quantum mechanics that governs how the wave function evolves over time. There are two main forms: the time-dependent Schrödinger equation, which describes how the wave function changes with time, and the time-independent version, used for systems with constant energy. For a single non-relativistic particle in one dimension, the time-dependent equation is written as:
+            iħ ∂Ψ/∂t = - (ħ²/2m) ∂²Ψ/∂x² + V(x)Ψ,
+            where ħ is the reduced Planck’s constant, m is the mass, and V(x) is the potential energy. This equation allows physicists to predict the behavior of quantum systems over time.</p>
+            <div class = "d-flex flex-row justify-content-center mb-2">
+                <button class="button-1 bg-secondary" onclick="display('section1')">back</button>
+        </div>
+            <div class = "d-flex flex-row justify-content-center">
+            <button class="button-1 bg-secondary" onclick="display('section3')">next</button>
+    </div>
+</div>
+</div>
+<div id = "section3">
+    <div class = "background-2"></div>
+    <meta charset="UTF-8">
+    <title>Wave Functions in a 1D Infinite Potential Well</title>
+
+    <!-- Bootstrap for styling (optional, you already had it) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Plotly.js for plotting -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body {
+            padding: 20px;
+            background-color: white;
+        }
+        #plot {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="text-center mb-4">Wave Functions in a 1D Infinite Potential Well</h1>
+
+    <div class="container text-center">
+        <div class="form-group">
+            <input type="number" id="length" class="form-control mb-2" placeholder="Enter Length (L)" value="10">
+            <input type="number" id="states" class="form-control mb-2" placeholder="Enter Number of States" value="3">
+            <button class="btn btn-primary" onclick="plotWaveFunctions()">Plot Wave Functions</button>
+        </div>
+
+        <div id="plot"></div>
+
+        <div class="mt-4">
+            <button class="btn btn-secondary" onclick="history.back()">Back</button>
+        </div>
+</div>
+    <script>
+        function plotWaveFunctions() {
+            let L = parseFloat(document.getElementById('length').value);
+            let n_states = parseInt(document.getElementById('states').value);
+
+            if (isNaN(L) || isNaN(n_states) || L <= 0 || n_states <= 0) {
+                alert("Please enter positive numbers for L and number of states!");
+                return;
+            }
+
+            let x = [];
+            let numPoints = 1000;
+            for (let i = 0; i <= numPoints; i++) {
+                x.push(L * i / numPoints);
+            }
+
+            let data = [];
+
+            for (let n = 1; n <= n_states; n++) {
+                let psi_n = x.map(xi => Math.sqrt(2 / L) * Math.sin(n * Math.PI * xi / L));
+
+                data.push({
+                    x: x,
+                    y: psi_n,
+                    mode: 'lines',
+                    name: `n=${n}`
+                });
+            }
+
+            let layout = {
+                title: 'Wave Functions in a 1D Infinite Potential Well',
+                xaxis: { title: 'Position (x)' },
+                yaxis: { title: 'Wave Function ψ(x)' },
+                legend: { title: { text: 'Quantum States' } },
+                margin: { t: 60 }
+            };
+
+            Plotly.newPlot('plot', data, layout);
+        }
+</script>
+</div>
+</div>
+<script type="text/javascript" src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/js/ccbp-ui-kit.js"></script>
+</body>
+</html>
